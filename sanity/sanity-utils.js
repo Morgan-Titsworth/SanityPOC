@@ -21,3 +21,25 @@ export async function getProjects(){
         }`
     )
 }
+
+export async function getProject(slug){
+    const client = createClient({
+        projectId: 'n1fslebr',
+        title: 'sanitypoc',
+        dataset: 'asd',
+        apiVersion: '2023-06-27',
+    });
+    return client.fetch(
+        groq`*[_type == "project" && $slug.current = $slug][0]{
+            _id,
+            _createdAt,
+            name,
+            "slug": slug.current,
+            "imageUrl": image.asset -> url,
+            "imageAlt": image.alt,
+            "content": image.content,
+            "imageURL": image.url,
+        }`,
+        { slug }
+    )
+}
