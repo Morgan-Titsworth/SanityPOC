@@ -30,7 +30,7 @@ export async function getProject(slug){
         apiVersion: '2023-06-27',
     });
     return client.fetch(
-        groq`*[_type == "project" && slug.current == $slug]{
+        groq`*[_type == "project" && slug.current == $slug][0]{
             _id,
             _createdAt,
             name,
@@ -43,3 +43,5 @@ export async function getProject(slug){
         { slug }
     )
 }
+//without the [0] you need to reference the first item in the array in your pages, or wherever you're pulling the data
+//const projectItems = project[0] as an example

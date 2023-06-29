@@ -2,13 +2,13 @@
 import { getProject } from "../../../sanity/sanity-utils";
 
 export default function Project({ project }) {
+    
     return <div>{project.name} asdasd</div>
 }
 
 export async function getServerSideProps({ params }) {
     try {
-        const projects = await getProject(params.project);
-        const project = projects[0];  // Take the first item of the array
+        const project = await getProject(params.project);
 
         // Check if project is not undefined or null
         if (!project) {
