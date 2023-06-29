@@ -30,7 +30,7 @@ export async function getProject(slug){
         apiVersion: '2023-06-27',
     });
     return client.fetch(
-        groq`*[_type == "project" && $slug.current = $slug][0]{
+        groq`*[_type == "project" && slug.current == $slug]{
             _id,
             _createdAt,
             name,
